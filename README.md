@@ -8,3 +8,10 @@ Critical to this simulation is ensuring thread safety, which I achieve through t
 
 **Problem 2**
 
+This program is a multi-threaded temperature monitoring and report generating system that represents a set of temperature sensors, each recording temperature readings for a sixty-minute timeframe. By utilizing threads, the program simulates simultaneous temperature readings from multiple sensors and uses the collected data to generate a detailed report pinpointing the five warmest and coldest readings as well as the ten-minute period with the broadest temperature difference.
+
+There are two main classes incorporated in the program. One, the Thermometer, stands for a temperature sensor recording 60 readings (one per minute), and two, the ReportCard, containing multiple Thermometer objects, symbolizing a complete temperature report. 
+
+The recordAllTemperatures method in the Thermometer class is thread-safe because it uses std::lock_guard to ensure mutual exclusion while accessing the random temperature generator. This built-in security assures that one single thread can access this piece at any given moment, thus preventing any race conditions from occurring. The generateReportCard method in the ReportCard class consolidates temperatures from all the temperature sensors into one vector that is then sorted. This arrangement allows for a swift calculation of the five lowest and highest temperatures.
+
+The program takes advantage of C++’s Standard Template Library (STL), which offers efficient implementations for widely used data structures and algorithms. The practice of consolidating temperature data from all sensors provides constant time access to any element into a single vector. The use of a std::sort function makes sure that the sorting operation is at most O(n log(n)), where n stands for the total number of temperature readings.
